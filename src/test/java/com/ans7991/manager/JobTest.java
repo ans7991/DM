@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -13,11 +15,13 @@ public class JobTest {
   private Job job;
   private String targetPath;
   private HttpFile httpFile;
+  private Path path;
 
   @Before
   public void setUp() throws Exception {
     URL url = new URL("https://wiki.sugarlabs.org/images/7/74/Ubuntu-small.jpg");
-    targetPath = "/Users/anshulrastogi/Downloads/temp/Ubuntu-small.jpg";
+    path = Files.createTempDirectory("temp-download");
+    targetPath = path.toAbsolutePath().toString().concat("Ubuntu-small.jpg");
     httpFile = new HttpFile(url, targetPath);
 
     job = new Job(httpFile);
