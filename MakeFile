@@ -9,5 +9,8 @@ compile:
 test:
 	./gradlew test
 
+build:
+	./gradlew clean build
+
 run: build
 	java -jar 'build/libs/DM-all-1.0.jar' $(url) $(location)
