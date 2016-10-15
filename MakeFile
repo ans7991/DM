@@ -1,0 +1,13 @@
+default: run
+
+clean:
+	./gradlew clean
+
+compile:
+	./gradlew uberJar
+
+test:
+	./gradlew test
+
+run: build
+	java -jar 'build/libs/DM-all-1.0.jar' $(url) $(location)

@@ -18,7 +18,7 @@ public class ExtractorTest {
 
   @Test
   public void shouldExtractTargetPathFromArgs() throws Exception {
-    String target = Extractor.extractTarget(args);
+    String target = Extractor.extractTargetPath(args);
     assertEquals("/Users/anshulrastogi/Downloads/temp/postgresql-9.2-1002.jdbc4.jar", target);
   }
 

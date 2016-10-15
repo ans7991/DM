@@ -6,29 +6,36 @@ import org.junit.Test;
 
 import java.net.URL;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class JobTest {
   private Job job;
-  private Progress mockProgress;
+  private String targetPath;
+  private HttpFile httpFile;
 
   @Before
   public void setUp() throws Exception {
-    mockProgress = mock(Progress.class);
-    HttpFile httpFile = new HttpFile(new URL("http://url.xyz"), "");
-    job = new Job(httpFile, mockProgress);
+    URL url = new URL("https://wiki.sugarlabs.org/images/7/74/Ubuntu-small.jpg");
+    targetPath = "/Users/anshulrastogi/Downloads/temp/Ubuntu-small.jpg";
+    httpFile = new HttpFile(url, targetPath);
+
+    job = new Job(httpFile);
   }
 
   @Test
-  public void shouldStopProgress() throws Exception {
-    job.stopProgress();
-    verify(mockProgress).stop();
+  public void shouldStartAJob() throws Exception {
+    job.start();
+    assertTrue(job.isRunning());
+    job.stop();
   }
 
   @Test
-  public void shouldStartProgress() throws Exception {
-    job.startProgress();
-    verify(mockProgress).display();
+  public void shouldStopAJob() throws Exception {
+    job.start();
+    assertTrue(job.isRunning());
+    job.stop();
+    Thread.sleep(1);
+    assertFalse(job.isRunning());
   }
 }

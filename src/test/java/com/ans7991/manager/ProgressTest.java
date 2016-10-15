@@ -9,10 +9,10 @@ public class ProgressTest {
   public void shouldDisplayUpdatingProgress() throws Exception {
     Progress progress = new Progress();
     progress.display();
-    Assert.assertEquals(0, progress.getProgress());
+    Assert.assertEquals(0, progress.getPercentCompleted());
 
     progress.update(500, 1000);
-    Assert.assertEquals(50, progress.getProgress());
+    Assert.assertEquals(50, progress.getPercentCompleted());
 
     progress.stop();
   }

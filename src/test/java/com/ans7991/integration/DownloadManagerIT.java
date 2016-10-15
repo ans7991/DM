@@ -15,7 +15,6 @@ import static org.junit.Assert.*;
 public class DownloadManagerIT {
   private Downloader downloader;
   private HttpFile httpFile;
-  private Progress progress;
   private String targetPath;
   private File downloadedFile;
 
@@ -25,8 +24,7 @@ public class DownloadManagerIT {
     targetPath = "/Users/anshulrastogi/Downloads/temp/Ubuntu-small.jpg";
     httpFile = new HttpFile(url, targetPath);
 
-    progress = new Progress();
-    downloader = new Downloader(httpFile, progress);
+    downloader = new Downloader(httpFile);
   }
 
   @Test
@@ -35,7 +33,7 @@ public class DownloadManagerIT {
     assertFalse(downloadedFile.exists());
 
     downloader.start();
-    Thread.sleep(3000);
+    Thread.sleep(5000);
 
     assertTrue(downloadedFile.exists());
     assertEquals(3023, downloadedFile.length());
@@ -52,7 +50,7 @@ public class DownloadManagerIT {
     downloader.pause();
     Thread.sleep(1000);
 
-    downloader.resume(httpFile, progress);
+    downloader.resume(httpFile);
     Thread.sleep(4000);
 
     assertTrue(downloadedFile.exists());

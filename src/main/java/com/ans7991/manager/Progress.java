@@ -1,11 +1,11 @@
 package com.ans7991.manager;
 
 public class Progress {
-  private int progress;
+  private int percentCompleted;
   private Thread thread;
 
   void update(long downloaded, long total) {
-    progress = (int) (downloaded * 100 / total);
+    percentCompleted = (int) (downloaded * 100 / total);
   }
 
   void display() throws InterruptedException {
@@ -13,7 +13,7 @@ public class Progress {
       @Override
       public void run() {
         do {
-          System.out.print("\rDownloading..............................." + progress + "%");
+          System.out.print("\rDownloading..............................." + percentCompleted + "%");
           try {
             Thread.sleep(1);
           } catch (InterruptedException e) {
@@ -29,7 +29,7 @@ public class Progress {
     thread.stop();
   }
 
-  int getProgress() {
-    return progress;
+  int getPercentCompleted() {
+    return percentCompleted;
   }
 }

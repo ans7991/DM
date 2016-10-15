@@ -5,25 +5,21 @@ import java.io.IOException;
 
 public class Downloader {
   private Job job;
-  private Thread thread;
 
-  public Downloader(HttpFile httpFile, Progress progress) throws IOException {
-    this.job = new Job(httpFile, progress);
+  public Downloader(HttpFile httpFile) throws IOException {
+    this.job = new Job(httpFile);
   }
 
   public void start() throws InterruptedException {
-    thread = new Thread(job);
-    thread.start();
-    job.startProgress();
+    job.start();
   }
 
   public void pause() {
-    thread.stop();
-    job.stopProgress();
+    job.stop();
   }
 
-  public void resume(HttpFile httpFile, Progress progress) throws IOException, InterruptedException {
-    this.job = new Job(httpFile, progress);
+  public void resume(HttpFile httpFile) throws IOException, InterruptedException {
+    this.job = new Job(httpFile);
     start();
   }
 }

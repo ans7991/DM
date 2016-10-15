@@ -1,8 +1,10 @@
+apply plugin: 'application'
 
-apply plugin: 'java'
+mainClassName = "com.ans7991.Driver"
+version = 1.0
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -12,8 +14,13 @@ dependencies {
                 'org.mockito:mockito-core:1.+'
 }
 
-task download(type: JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    main = 'com.ans7991.Driver'
-    args = [url, location]
+task uberJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Download Manager',
+                'Implementation-Version': version,
+                'Main-Class': mainClassName
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
