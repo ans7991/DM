@@ -11,7 +11,7 @@ public class Driver {
   public static void main(String[] args) throws IOException, InterruptedException {
     if (args.length < 2) {
       System.out.println("Please provide file url to download, and target directory to save downloaded file!!");
-      System.out.println("Usage: make <fileURL> <target_directory>");
+      System.out.println("Usage: make url=<fileURL> location=<target_directory>");
       return;
     }
     URL url = Extractor.extractURL(args);
