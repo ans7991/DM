@@ -1,7 +1,7 @@
 package com.ans7991.manager;
 
 public class Progress {
-  private int percentCompleted;
+  private volatile int percentCompleted;
   private Thread thread;
 
   void update(long downloaded, long total) {
